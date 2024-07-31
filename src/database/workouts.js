@@ -1,4 +1,3 @@
-const { stat } = require("fs");
 const DB = require("./db.json");
 const { saveToDatabase } = require("./utils");
 
@@ -17,9 +16,8 @@ const getWorkoutById = (workoutId) => {
 const createWorkout = (newWorkout) => {
   const isAlreadyAdded =
   DB.workouts.findIndex((workout) => workout.name === newWorkout.name) > -1;
-  console.log("🚀 ~ createWorkout ~ isAlreadyAdded:", isAlreadyAdded)
+
   if (isAlreadyAdded) {
-    console.log("🚀 ~ createWorkout ~ isAlreadyAdded:", isAlreadyAdded)
     throw {
       status: 400,
       message: `Workout with the name ${newWorkout.name} already exists`,
@@ -27,7 +25,6 @@ const createWorkout = (newWorkout) => {
   }
   
   try{
-    console.log("🚀 ~ createWorkout ~ newWorkout:", newWorkout)
     DB.workouts.push(newWorkout);
   saveToDatabase(DB);
   return newWorkout;

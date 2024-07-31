@@ -1,5 +1,4 @@
 const workoutService = require("../services/workoutService");
-const beautify = require("json-beautify");
 
 const getAllWorkouts = (req, res) => {
   try {
@@ -31,6 +30,7 @@ const createWorkout = (req, res) => {
           message: "Please provide name, mode, equipment, exercises, and trainer tips",
         },
     });
+    
     return;
   }
 
@@ -44,7 +44,6 @@ const createWorkout = (req, res) => {
 
   try{
     const createdWorkout = workoutService.createWorkout(newWorkout);
-    console.log("🚀 ~ createWorkout ~ createdWorkout:", createdWorkout)
 
   res.status(201).send({ status: "OK", data: createdWorkout });
   } catch (error) {

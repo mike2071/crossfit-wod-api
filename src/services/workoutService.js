@@ -1,10 +1,9 @@
 const workouts = require("../database/workouts");
-const beautify = require("json-beautify");
 const { v4: uuid } = require("uuid");
 
 const getAllWorkouts = () => {
-  const result = beautify(workouts.getAllWorkouts(), null, 2, 100);
-  console.log(result);
+  const result = workouts.getAllWorkouts();
+
   return result;
 };
 
@@ -14,12 +13,11 @@ const getWorkoutById = () => {
 
 const createWorkout = (newWorkout) => {
   const workoutToInsert = {
-      ...newWorkout,
-      id: uuid(),
-      createdAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
-      updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
-    };
-    console.log("🚀 ~ createWorkout ~ workoutToInsert:", workoutToInsert)
+    ...newWorkout,
+    id: uuid(),
+    createdAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+    updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+  };
 
   try {
     const createdWorkout = workouts.createWorkout(workoutToInsert);
@@ -31,13 +29,13 @@ const createWorkout = (newWorkout) => {
 
 const updateWorkout = (workoutId, changes) => {
   const updatedWorkout = workouts.updateWorkout(workoutId, changes);
-  
+
   return updatedWorkout;
 };
 
 const deleteWorkout = (workoutId) => {
   const deletedWorkout = workouts.deleteWorkout(workoutId);
-  
+
   return deletedWorkout;
 };
 
